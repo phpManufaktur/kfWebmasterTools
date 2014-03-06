@@ -1,0 +1,55 @@
+/* 
+  flexContent
+
+  @author Team phpManufaktur <team@phpmanufaktur.de>
+  @link https://kit2.phpmanufaktur.de
+  @link https://github.com/phpManufaktur/kitFramework/wiki  
+  @copyright 2013 Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>
+  @license MIT License (MIT) http://www.opensource.org/licenses/MIT
+*/
+
+.container {
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+label {
+  margin: 0 0 3px 0;
+}
+@media (max-width: 767px) {
+  label {
+    text-align: left;
+  }
+}
+label.required:after {
+  content: '*';
+  color: #da251d;
+  background-color: transparent;
+  font-weight: bold;
+}
+.form-inline label {
+  margin: 0 5px 0 5px;
+}
+.form-inline button {
+  margin: 0 0 0 10px;
+}
+
+#about-wrap {
+  margin: 50px 0 0 0;
+  padding: 0;
+}
+
+.margin-top-15 {
+  margin-top: 15px;
+}
+
+.protocol {
+  overflow: scroll !important;
+  height: 800px;
+}
+
+.protocol code {
+  color: #708090; 
+}

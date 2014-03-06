@@ -1,0 +1,90 @@
+{
+  "name":"WebmasterTools",
+  "guid":"C753B4EB-DA9D-403F-BFEC-3DE3159EC3C3",
+  "category":"extension",
+  "group":"phpManufaktur",
+  "vendor":{
+      "name":"phpManufaktur",
+      "url":"https:\/\/phpmanufaktur.de",
+      "mail":"team@phpmanufaktur.de",
+      "address":{
+          "street":"Stockholmer Straße 31",
+          "zip":"13359",
+          "city":"Berlin",
+          "country":"Germany"
+      },
+      "phone":"+49 30 68813647"
+  },
+  "type":"application",
+  "path":"\/extension\/phpmanufaktur\/phpManufaktur\/WebmasterTools",
+  "namespace":"phpManufaktur\\WebmasterTools",
+  "link":{
+    "about":"\/webmastertools\/about"
+  },
+  "release":{
+    "number":"0.10",
+    "date":"2014-02-24",
+    "status":"beta"
+  },
+  "description":{
+    "en":{
+      "title":"WebmasterTools",
+      "short":"Collection of tools for the webmaster",
+      "long":"Collection of tools for the webmaster",
+      "url":"https:\/\/kit2.phpmanufaktur.de"
+    },
+    "de":{
+        "title":"WebmasterTools",
+        "short":"Sammlung von Werkzeugen für den Webmaster",
+        "long":"Sammlung von Werkzeugen für den Webmaster",
+        "url":"https:\/\/kit2.phpmanufaktur.de"
+    }
+  },
+  "require":{
+    "framework":{
+      "release":"0.27"
+    },
+    "extension":{
+        "phpmanufaktur":{
+            "Basic":{
+                "release":"0.83"
+            },
+            "Library":{
+                "release":"0.17"
+            }
+        }
+    }
+  },
+  "setup": {
+      "install":"\/admin\/webmastertools\/setup",
+      "update":"\/admin\/webmastertools\/update",
+      "uninstall":"\/admin\/webmastertools\/uninstall",
+      "icon_path":{
+        "BlackCat":"\/extension\/phpmanufaktur\/phpManufaktur\/WebmasterTools\/Data\/Setup\/Icon\/icon.png",
+        "WebsiteBaker":"\/extension\/phpmanufaktur\/phpManufaktur\/WebmasterTools\/Data\/Setup\/Icon\/tool_icon.png"
+      }
+  },
+  "license": {
+    "name":"MIT License",
+    "url":"https:\/\/github.com\/phpManufaktur\/kfWebmasterTools\/raw\/master\/LICENSE.md"
+  },
+  "download":{
+    "availability":"public",
+    "agreement":"free",
+    "github":{
+      "organization":"phpManufaktur",
+      "repository":"kfWebmasterTools"
+    },
+    "url":"https:\/\/github.com\/phpManufaktur\/kfWebmasterTools"
+  },
+  "issues": {
+    "en": {
+      "url":"https:\/\/github.com/phpManufaktur\/kfWebmasterTools\/issues"
+    }
+  },
+  "support": {
+    "en": {
+      "url":"https:\/\/support.phpmanufaktur.de"
+    }
+  }
+}
