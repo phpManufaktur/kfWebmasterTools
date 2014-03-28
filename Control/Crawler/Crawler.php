@@ -78,7 +78,7 @@ class Crawler
         self::$script_stop = self::$script_start + $limit_execution_time;
 
         // set index URL - always remove trailing slash
-        self::$index_url = rtrim(self::$config['url']['index'][0], '/');
+        self::$index_url = rtrim(self::$config['sitemap']['url']['index'][0], '/');
         self::$status = 'UNDEFINED';
 
         $this->CrawlerData = new CrawlerURL($app);
@@ -131,7 +131,7 @@ class Crawler
             self::$index_url_alternate = http_build_url(self::$index_url, $parsed);
         }
 
-        self::$check_external_url = self::$config['tag']['a']['href']['external']['check'];
+        self::$check_external_url = self::$config['sitemap']['tag']['a']['href']['external']['check'];
 
     }
 
@@ -171,7 +171,7 @@ class Crawler
             $parsed_url = parse_url($url.$path);
             $this->app['monolog.crawler']->addInfo(sprintf('Changed %s to URL %s', $link, $url), $parsed_url);
         }
-        elseif (isset($parsed_url['scheme']) && !in_array($parsed_url['scheme'], self::$config['url']['scheme'])) {
+        elseif (isset($parsed_url['scheme']) && !in_array($parsed_url['scheme'], self::$config['sitemap']['url']['scheme'])) {
             // URL scheme is not supported
             $this->app['monolog.crawler']->addInfo(sprintf('Skipped %s, URL scheme is not supported', $link), $parsed_url);
             return false;
@@ -192,13 +192,13 @@ class Crawler
         }
 
         $add_query = false;
-        if (!empty(self::$config['tag']['a']['href']['parameter']['create_url']) &&
+        if (!empty(self::$config['sitemap']['tag']['a']['href']['parameter']['create_url']) &&
             isset($parsed_url['query']) && !empty($parsed_url['query'])) {
             $queries = (strpos($parsed_url['query'], '&')) ? explode('&', $parsed_url['query']) : array($parsed_url['query']);
             foreach ($queries as $query) {
                 if (strpos($query, '=')) {
                     list($key, $value) = explode('=', $query);
-                    if (in_array($key, self::$config['tag']['a']['href']['parameter']['create_url'])) {
+                    if (in_array($key, self::$config['sitemap']['tag']['a']['href']['parameter']['create_url'])) {
                         // add query to this URL
                         $add_query = true;
                         break;
@@ -278,19 +278,23 @@ class Crawler
         }
         // clear the internal errors
         libxml_clear_errors();
-
+echo 'xx:'.$DOM->saveHTML();
         // gather all links
         self::$parent_url = $url;
 
         $this->app['monolog.crawler']->addInfo(sprintf('Start gathering all links for URL %s', $url));
 
+        $checkedLink = false;
         foreach($DOM->getElementsByTagName('a') as $link) {
             if (microtime(true) > self::$script_stop) {
                 $this->app['monolog.crawler']->addInfo('BREAK the SCRIPT');
                 self::$status = 'BREAK';
                 return false;
             }
-            $this->addLinkToDatabase($link->getAttribute('href'), $link->getAttribute('target'));
+            if ($link->hasAttribute('href') || $link->hasAttribute('target')) {
+                $this->addLinkToDatabase($link->getAttribute('href'), $link->getAttribute('target'));
+                $checkedLink = true;
+            }
         }
 
         // dive into the iframes
@@ -325,7 +329,10 @@ class Crawler
                         self::$status = 'BREAK';
                         return false;
                     }
-                    $this->addLinkToDatabase($link->getAttribute('href'), $link->getAttribute('target'));
+                    if ($link->hasAttribute('href') || $link->hasAttribute('target')) {
+                        $this->addLinkToDatabase($link->getAttribute('href'), $link->getAttribute('target'));
+                        $checkedLink = true;
+                    }
                 }
             }
         }
@@ -391,7 +398,7 @@ class Crawler
 
         $action = 'UNDEFINED';
 
-        foreach (self::$config['url']['index'] as $url) {
+        foreach (self::$config['sitemap']['url']['index'] as $url) {
             // loop through the index urls
             self::$index_url = $url;
             $this->checkIndexURL();
@@ -406,7 +413,7 @@ class Crawler
                 // check if a new scan should be processed ...
                 $timestamp = $this->CrawlerData->selectLastCrawlDateTime(self::$index_url);
                 $scan = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp);
-                $scan->addHours(self::$config['url']['crawl']['hours']);
+                $scan->addHours(self::$config['sitemap']['url']['crawl']['hours']);
                 $now = Carbon::now();
                 if ($now->gt($scan)) {
                     // CREATE a new crawling for this index URL

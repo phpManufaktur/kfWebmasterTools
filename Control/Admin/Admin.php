@@ -21,6 +21,7 @@ class Admin extends Alert
     protected static $usage = null;
     protected static $usage_param = null;
     protected static $config = null;
+    protected static $language = null;
 
     /**
      * Initialize the class with the needed parameters
@@ -34,9 +35,10 @@ class Admin extends Alert
         $cms = $this->app['request']->get('usage');
         self::$usage = is_null($cms) ? 'framework' : $cms;
         self::$usage_param = (self::$usage != 'framework') ? '?usage='.self::$usage : '';
+        self::$language = $this->app['session']->get('CMS_LOCALE', 'en');
         // set the locale from the CMS locale
         if (self::$usage != 'framework') {
-            $app['translator']->setLocale($this->app['session']->get('CMS_LOCALE', 'en'));
+            $app['translator']->setLocale(self::$language);
         }
         $Configuration = new Configuration($app);
         self::$config = $Configuration->getConfiguration();
@@ -56,18 +58,25 @@ class Admin extends Alert
     public function getToolbar($active) {
         $toolbar_array = array(
             'sitemap' => array(
-                'name' => 'sitemap',
-                'text' => 'Sitemap',
-                'hint' => 'Create Sitemaps for your Website',
-                'link' => FRAMEWORK_URL.'/admin/webmastertools/sitemap'.self::$usage_param,
-                'active' => ($active == 'sitemap')
+                'name' => 'sitemaps',
+                'text' => 'Sitemaps',
+                'hint' => 'Check the created sitemaps',
+                'link' => FRAMEWORK_URL.'/admin/webmastertools/sitemaps'.self::$usage_param,
+                'active' => ($active == 'sitemaps')
                 ),
             'protocol' => array(
                 'name' => 'protocol',
-                'text' => 'Protocol',
-                'hint' => 'The crawler protocols',
-                'link' => FRAMEWORK_URL.'/admin/webmastertools/protocol/crawler'.self::$usage_param,
+                'text' => 'Protocols',
+                'hint' => 'kitFramework protocols',
+                'link' => FRAMEWORK_URL.'/admin/webmastertools/protocol'.self::$usage_param,
                 'active' => ($active == 'protocol')
+            ),
+            'configuration' => array(
+                'name' => 'configuration',
+                'text' => 'Configurations',
+                'hint' => 'kitFramework configurations',
+                'link' => FRAMEWORK_URL.'/admin/webmastertools/configuration'.self::$usage_param,
+                'active' => ($active == 'configuration')
             ),
             'about' => array(
                 'name' => 'about',

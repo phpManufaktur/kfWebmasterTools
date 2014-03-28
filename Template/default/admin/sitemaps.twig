@@ -29,32 +29,22 @@
   <div class="container">
     {% include '@phpManufaktur/WebmasterTools/Template/default/admin/toolbar.twig' %}
     
-    <div class="margin-top-15"></div>
+    <h2>{{ 'Sitemaps'|trans }}</h2>
     
     {{ alert }}
-    
-    {% form_theme form '@phpManufaktur/flexContent/Template/default/admin/form.fields.horizontal.twig' %}
-    
-    <form class="form-horizontal" action="{{ FRAMEWORK_URL }}/admin/webmastertools/protocol/crawler/select?usage={{ usage }}" method="post" role="form">
-      {{ form_errors(form) }}
-      {{ form_row(form._token) }}
-      <div class="row">
-        <div class="col-sm-4">
-          {{ form_widget(form.protocol) }}
-        </div>
-        <div class="col-sm-4">
-          <button type="submit" class="btn btn-default">{{ 'Load'|trans }}</button>
-        </div>
-      </div> 
-    </form>
-    
-    <div class="margin-top-15"></div>
-    
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{ 'Protocol'|trans }}: {{ date|date('DATE_FORMAT'|trans) }}</h3>
-      </div>
-      <div class="panel-body protocol"><code>{% for line in protocol %}{{ line }}<br />{% endfor %}</code></div>
-    </div> 
+
+    {% if sitemaps|length < 1 %}
+      {# no URL defined! #}
+      {% include '@phpManufaktur/Basic/Template/default/pattern/bootstrap/alert.twig' with {
+          'type':'alert-warning', 'content':'not available'} %}
+    {% else %}
+      <ul>
+      {% for url in config.sitemap.url.index %}
+        <h3><a href="{{ url }}" target="_blank">{{ url }}</a></h3>
+        
+      {% endfor %}
+      </ul>
+    {% endif %}
+      
   </div>
 {% endblock content %}

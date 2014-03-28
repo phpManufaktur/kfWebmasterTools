@@ -15,6 +15,30 @@ if ('á' != "\xc3\xa1") {
 }
 
 return array(
-    'Protocol'
-        => 'Protokoll',
+    'Check the created sitemaps'
+        => 'Überprüfen der erstellten Sitemaps',
+    'Configurations'
+        => 'Einstellungen',
+
+    'Information about the WebmasterTools'
+        => 'Information über die WebmasterTools',
+
+    'Load'
+        => 'Laden',
+
+    'Please visit the <a href="%url%" target="_blank">Wiki</a> to get more information about <em>%file%</em>.'
+        => 'Bitte besuchen Sie das <a href="%url%" target="_blank">Wiki</a> um Informationen über den Aufbau und die Verwendung der Datei <em>%file%</em> zu erhalten.',
+    'Protocols'
+        => 'Protokolle',
+
+    'kitFramework configurations'
+        => 'kitFramework Einstellungen',
+    'kitFramework protocols'
+        => 'kitFramework Protokolle',
+
+    'Save configuration'
+        => 'Einstellungen sichern',
+    'Successfull saved the configuration file %file%.'
+        => 'Die Konfigurationsdatei <strong>%file%</strong> wurde erfolgreich gesichert.',
+
 );

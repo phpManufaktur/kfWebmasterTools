@@ -8,6 +8,15 @@
   @license MIT License (MIT) http://www.opensource.org/licenses/MIT
 */
 
+body {
+  margin: 0;
+  padding: 0;
+}
+#content {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 .container {
   padding-left: 0;
   padding-right: 0;
@@ -51,5 +60,10 @@ label.required:after {
 }
 
 .protocol code {
+  padding-left: 0px;
   color: #708090; 
+}
+
+#jsoneditor {
+  padding: 0 0 20px 0;
 }

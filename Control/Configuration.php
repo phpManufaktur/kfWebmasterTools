@@ -43,35 +43,87 @@ class Configuration
                 'max_execution_time' => 60,
                 'buffer_execution_time' => 10
             ),
-            'url' => array(
-                'index' => array(
-                    CMS_URL
-                ),
-                'scheme' => array(
-                    'http',
-                    'https'
-                ),
-                'crawl' => array(
-                    'hours' => 24
+            'protocol' => array(
+                'pattern' => array(
+                    '/logfile/framework-*.log',
+                    '/logfile/crawler-*.log'
                 )
             ),
-            'tag' => array(
-                'a' => array(
-                    'href' => array(
-                        'parameter' => array(
-                            'create_url' => array(
-
-                            )
-                        ),
-                        'external' => array(
-                            'check' => false
-                        )
+            'configuration' => array(
+                'framework' => array(
+                    'pattern' => array(
+                        '/*.json'
                     )
                 ),
-                'iframe' => array(
-                    'src' => array(
-                        'follow' => array(
-                            'internal' => true
+                'extension' => array(
+                    'pattern' => array(
+                        '/config.*.json'
+                    )
+                ),
+                'information' => array(
+                    'cms.json' => array(
+                        'path' => '/framework.json',
+                        'image' => '/framework.jpg',
+                        'wiki' => 'https://github.com/phpManufaktur/kitFramework/wiki/kitFramework-%23-Configuration#cmsjson'
+                    ),
+                    'doctrine.cms.json' => array(
+                        'path' => '/framework.json',
+                        'image' => '/framework.jpg',
+                        'wiki' => 'https://github.com/phpManufaktur/kitFramework/wiki/kitFramework-%23-Configuration#doctrinecmsjson'
+                    ),
+                    'framework.json' => array(
+                        'path' => '/framework.json',
+                        'image' => '/framework.jpg',
+                        'wiki' => 'https://github.com/phpManufaktur/kitFramework/wiki/kitFramework-%23-Configuration#frameworkjson'
+                    ),
+                    'proxy.json' => array(
+                        'path' => '/framework.json',
+                        'image' => '/framework.jpg',
+                        'wiki' => 'https://github.com/phpManufaktur/kitFramework/wiki/kitFramework-%23-Configuration#proxyjson'
+                    ),
+                    'recaptcha.json' => array(
+                        'path' => '/framework.json',
+                        'image' => '/framework.jpg',
+                        'wiki' => 'https://github.com/phpManufaktur/kitFramework/wiki/kitFramework-%23-Configuration#recaptchajson'
+                    ),
+                    'swift.cms.json' => array(
+                        'path' => '/framework.json',
+                        'image' => '/framework.jpg',
+                        'wiki' => 'https://github.com/phpManufaktur/kitFramework/wiki/kitFramework-%23-Configuration#swiftcmsjson'
+                    )
+                )
+            ),
+            'sitemap' => array(
+                'url' => array(
+                    'index' => array(
+                        CMS_URL
+                    ),
+                    'scheme' => array(
+                        'http',
+                        'https'
+                    ),
+                    'crawl' => array(
+                        'hours' => 24
+                    )
+                ),
+                'tag' => array(
+                    'a' => array(
+                        'href' => array(
+                            'parameter' => array(
+                                'create_url' => array(
+
+                                )
+                            ),
+                            'external' => array(
+                                'check' => false
+                            )
+                        )
+                    ),
+                    'iframe' => array(
+                        'src' => array(
+                            'follow' => array(
+                                'internal' => true
+                            )
                         )
                     )
                 )

@@ -14,7 +14,7 @@ namespace phpManufaktur\WebmasterTools\Control\Admin;
 use phpManufaktur\WebmasterTools\Control\Admin\Admin;
 use Silex\Application;
 
-class Protocol extends Admin {
+class Protocols extends Admin {
 
     /**
      * Get the protocol file names for the form.factory
@@ -23,16 +23,23 @@ class Protocol extends Admin {
      */
     protected function getProtocolFileNamesForSelect()
     {
-        $files = glob(FRAMEWORK_PATH."/logfile/crawler-*.log");
-        natsort($files);
-
-        $result = array();
-        foreach ($files as $file) {
-            $basename = basename($file);
-            $date = substr($basename, strlen('crawler-'), strlen('0000-00-00'));
-            $result[$date] = $basename;
+        $files = array();
+        foreach (self::$config['protocol']['pattern'] as $pattern) {
+            $log = glob(FRAMEWORK_PATH.$pattern);
+            if (is_array($log)) {
+                $files = array_merge($files, $log);
+            }
         }
 
+        $result = array();
+
+        natsort($files);
+
+        foreach ($files as $file) {
+            $basename = basename($file);
+            $date = substr($basename, strpos($basename, '-')+1, strlen('0000-00-00'));
+            $result[$file] = $basename;
+        }
         return $result;
     }
 
@@ -41,7 +48,7 @@ class Protocol extends Admin {
      *
      * @param string $date
      */
-    protected function getProtocolSelectForm($date=null)
+    protected function getProtocolSelectForm($protocol_file=null)
     {
         return $this->app['form.factory']->createBuilder('form')
             ->add('protocol', 'choice', array(
@@ -49,7 +56,7 @@ class Protocol extends Admin {
                 'empty_value' => '- please select -',
                 'expanded' => false,
                 'required' => true,
-                'data' => !empty($date) ? $date : date('Y-m-d'),
+                'data' => !empty($protocol_file) ? $protocol_file : sprintf(FRAMEWORK_PATH.'/logfile/framework-%s.log', date('Y-m-d')),
             ))
             ->getForm();
     }
@@ -64,10 +71,10 @@ class Protocol extends Admin {
     {
         $this->initialize($app);
 
-        // set today as default date
-        $date = date('Y-m-d');
+        // preselect the general framework logfile of today
+        $protocol_file = sprintf(FRAMEWORK_PATH.'/logfile/framework-%s.log', date('Y-m-d'));
 
-        $form = $this->getProtocolSelectForm($date);
+        $form = $this->getProtocolSelectForm($protocol_file);
 
         if ('POST' == $this->app['request']->getMethod()) {
             // the protocol select form was submitted
@@ -76,7 +83,8 @@ class Protocol extends Admin {
             if ($form->isValid()) {
                 // the form is valid
                 $data = $form->getData();
-                $date = $data['protocol'];
+                //$date = $data['protocol'];
+                $protocol_file = $data['protocol'];
             }
             else {
                 // general error (timeout, CSFR ...)
@@ -85,7 +93,6 @@ class Protocol extends Admin {
         }
 
         $protocol = array();
-        $protocol_file = sprintf(FRAMEWORK_PATH.'/logfile/crawler-%s.log', $date);
 
         if ($app['filesystem']->exists($protocol_file)) {
             // load only one line at a time
@@ -100,15 +107,13 @@ class Protocol extends Admin {
             $protocol = array_reverse($lines);
         }
 
-
         return $this->app['twig']->render($this->app['utils']->getTemplateFile(
-            '@phpManufaktur/WebmasterTools/Template', 'admin/protocol.twig'),
+            '@phpManufaktur/WebmasterTools/Template', 'admin/protocols.twig'),
             array(
                 'alert' => $this->getAlert(),
                 'usage' => self::$usage,
                 'toolbar' => $this->getToolbar('protocol'),
                 'form' => $form->createView(),
-                'date' => $date,
                 'protocol' => $protocol
             ));
     }

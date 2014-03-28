@@ -3,12 +3,14 @@
     {% for item in toolbar %}
       <li{% if item.active %} class="active"{% endif %}>
         <a href="{{ item.link }}" title="{{ item.hint|trans }}">
-          {%if item.name == 'sitemap' %}
-            <i class="fa fa-list"></i>
+          {%if item.name == 'sitemaps' %}
+            <i class="fa fa-sitemap"></i>
           {% elseif item.name == 'about' %}
             <i class="fa fa-question"></i>
           {% elseif item.name == 'protocol' %}
             <i class="fa fa-clock-o"></i>
+          {% elseif item.name == 'configuration' %}
+            <i class="fa fa-cogs"></i>
           {% endif %}
           {% if item.name != 'about' %}  
             <span class="visible-lg pull-right">&nbsp;{{ item.text|trans }}</span>  

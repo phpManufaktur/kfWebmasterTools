@@ -278,4 +278,14 @@ EOD;
             throw new \Exception($e);
         }
     }
+
+    public function countCrawledURLs($index_url, $index_type='SCAN')
+    {
+        try {
+            $SQL = "SELECT COUNT(`id`) FROM `".self::$table_name."` WHERE `index_url`='$index_url' AND `index_type`='$index_type'";
+            return $this->app['db']->fetchColumn($SQL);
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            throw new \Exception($e);
+        }
+    }
 }

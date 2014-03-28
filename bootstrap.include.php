@@ -54,12 +54,18 @@ $app->get('/admin/webmastertools/uninstall',
 
 $app->get('/admin/webmastertools/about',
     'phpManufaktur\WebmasterTools\Control\Admin\About::Controller');
-$app->get('/admin/webmastertools/sitemap',
-    'phpManufaktur\WebmasterTools\Control\Admin\SitemapCrawler::Controller');
-$app->get('/admin/webmastertools/protocol/crawler',
-    'phpManufaktur\WebmasterTools\Control\Admin\Protocol::Controller');
-$app->post('/admin/webmastertools/protocol/crawler/select',
-    'phpManufaktur\WebmasterTools\Control\Admin\Protocol::Controller');
+$app->get('/admin/webmastertools/sitemaps',
+    'phpManufaktur\WebmasterTools\Control\Admin\Sitemaps::Controller');
+$app->get('/admin/webmastertools/protocol',
+    'phpManufaktur\WebmasterTools\Control\Admin\Protocols::Controller');
+$app->post('/admin/webmastertools/protocol/select',
+    'phpManufaktur\WebmasterTools\Control\Admin\Protocols::Controller');
+$app->get('/admin/webmastertools/configuration',
+    'phpManufaktur\WebmasterTools\Control\Admin\Configurations::Controller');
+$app->post('/admin/webmastertools/configuration/select',
+    'phpManufaktur\WebmasterTools\Control\Admin\Configurations::Controller');
+$app->post('/admin/webmastertools/configuration/save',
+    'phpManufaktur\WebmasterTools\Control\Admin\Configurations::ControllerSaveJSON');
 
 $app->get('/webmastertools/crawler',
     'phpManufaktur\WebmasterTools\Control\Crawler\Crawler::Controller');
