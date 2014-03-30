@@ -66,6 +66,11 @@ class Configuration
                         'image' => '/framework.jpg',
                         'wiki' => 'https://github.com/phpManufaktur/kitFramework/wiki/kitFramework-%23-Configuration#cmsjson'
                     ),
+                    'config.webmastertools.json' => array(
+                        'path' => '/extension/phpmanufaktur/phpManufaktur/WebmasterTools/extension.json',
+                        'image' => '/extension/phpmanufaktur/phpManufaktur/WebmasterTools/extension.jpg',
+                        'wiki' => 'https://github.com/phpManufaktur/kfWebmasterTools/wiki/config.webmastertools.json'
+                    ),
                     'doctrine.cms.json' => array(
                         'path' => '/framework.json',
                         'image' => '/framework.jpg',

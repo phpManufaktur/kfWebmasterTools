@@ -71,6 +71,7 @@ class Configurations extends Admin
             }
         }
 
+        // sort the config files
         asort($result);
         return $result;
     }
@@ -172,6 +173,12 @@ class Configurations extends Admin
                 // general error (timeout, CSFR ...)
                 $this->setAlert('The form is not valid, please check your input and try again!', array(), self::ALERT_TYPE_DANGER);
             }
+        }
+        else {
+            // give a hint for the usage
+            $this->setAlert('This dialog enable you to edit all configuration files of the kitFramework itself and all installed '.
+                'extensions of the phpManufaktur and of third party manufacturers. Please select the configuration file you want to edit.',
+                array(), self::ALERT_TYPE_INFO);
         }
 
         return $this->app['twig']->render($this->app['utils']->getTemplateFile(

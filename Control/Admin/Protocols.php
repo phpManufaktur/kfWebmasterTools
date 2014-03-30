@@ -91,6 +91,9 @@ class Protocols extends Admin {
                 $this->setAlert('The form is not valid, please check your input and try again!', array(), self::ALERT_TYPE_DANGER);
             }
         }
+        else {
+            $this->setAlert('This dialog enable you to view the kitFramework logfiles. By default the actual logfile will be shown.');
+        }
 
         $protocol = array();
 

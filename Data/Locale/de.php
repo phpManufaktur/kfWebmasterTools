@@ -41,4 +41,9 @@ return array(
     'Successfull saved the configuration file %file%.'
         => 'Die Konfigurationsdatei <strong>%file%</strong> wurde erfolgreich gesichert.',
 
+    'This dialog enable you to edit all configuration files of the kitFramework itself and all installed extensions of the phpManufaktur and of third party manufacturers. Please select the configuration file you want to edit.'
+        => 'Dieser Dialog ermöglicht Ihnen die Bearbeitung von allen Konfigurationsdateien des kitFramework und der installierten Erweiterungen der phpManufaktur sowie von Drittanbietern. Bitte wählen Sie die gewünschte Konfigurationsdatei zum Bearbeiten aus.',
+    'This dialog enable you to view the kitFramework logfiles. By default the actual logfile will be shown.'
+        => 'Dieser Dialog ermöglicht Ihnen die Kontrolle der kitFramework Logdateien. Beim Aufruf wird die aktuelle Logdatei angezeigt.',
+
 );

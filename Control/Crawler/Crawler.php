@@ -278,7 +278,7 @@ class Crawler
         }
         // clear the internal errors
         libxml_clear_errors();
-echo 'xx:'.$DOM->saveHTML();
+
         // gather all links
         self::$parent_url = $url;
 
@@ -366,14 +366,14 @@ echo 'xx:'.$DOM->saveHTML();
             if ($this->processURL($link['url'], $http_status)) {
                 $data = array(
                     'status' => 'CHECKED',
-                    'exists' => 'YES',
+                    'url_exists' => 'YES',
                     'http_status' => $http_status
                 );
             }
             else {
                 $data = array(
                     'status' => 'CHECKED',
-                    'exists' => 'NO',
+                    'url_exists' => 'NO',
                     'http_status' => $http_status
                 );
             }
@@ -450,6 +450,23 @@ echo 'xx:'.$DOM->saveHTML();
                         break;
                     }
                 } while ($process);
+
+                if ($this->CrawlerData->countCrawledURLs(self::$index_url) < 1) {
+                    // we have not any hit for this URL - so we create a dummy record to finish the crawling
+                    $data = array(
+                        'index_url' => self::$index_url,
+                        'index_type' => 'SCAN',
+                        'url' => self::$index_url,
+                        'parent' => self::$index_url,
+                        'internal' => 'YES',
+                        'url_exists' => 'NO',
+                        'status' => 'CHECKED'
+                    );
+                    $this->CrawlerData->insert($data);
+                    $this->app['monolog.crawler']->addError('Was not able to crawl the URL '.self::$index_url.', set status to CHECKED to enable further scans. Please check this URL!',
+                        array(__METHOD__, __LINE__));
+                    self::$status = 'OK';
+                }
                 break;
             case 'PENDING':
                 // continue the crawling for the given index URL

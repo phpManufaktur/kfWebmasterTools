@@ -47,11 +47,11 @@ class CrawlerURL
         `internal` ENUM('YES','NO') NOT NULL DEFAULT 'NO',
         `target` VARCHAR(16) NOT NULL DEFAULT '',
         `http_status` VARCHAR(64) NOT NULL DEFAULT '- unknown -',
-        `exists` ENUM('YES','NO') NOT NULL DEFAULT 'NO',
+        `url_exists` ENUM('YES','NO') NOT NULL DEFAULT 'NO',
         `status` ENUM('PENDING','CHECKED') NOT NULL DEFAULT 'PENDING',
         `timestamp` TIMESTAMP,
         PRIMARY KEY (`id`),
-        INDEX (`index_url`, `exists`, `status`)
+        INDEX (`index_url`, `url_exists`, `status`)
     )
     COMMENT='Table for processing URLs by the Crawler'
     ENGINE=InnoDB
