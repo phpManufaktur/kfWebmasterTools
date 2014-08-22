@@ -176,8 +176,7 @@ class Configurations extends Admin
         }
         else {
             // give a hint for the usage
-            $this->setAlert('This dialog enable you to edit all configuration files of the kitFramework itself and all installed '.
-                'extensions of the phpManufaktur and of third party manufacturers. Please select the configuration file you want to edit.',
+            $this->setAlert('This dialog enable you to edit all configuration files of the kitFramework itself and all installed extensions of the phpManufaktur and of third party manufacturers. Please select the configuration file you want to edit.',
                 array(), self::ALERT_TYPE_INFO);
         }
 
