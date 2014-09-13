@@ -31,13 +31,13 @@
       "title":"WebmasterTools",
       "short":"Collection of tools for the webmaster",
       "long":"Collection of tools for the webmaster",
-      "url":"https:\/\/kit2.phpmanufaktur.de"
+      "url":"https:\/\/kit2.phpmanufaktur.de\/WebmasterTools"
     },
     "de":{
         "title":"WebmasterTools",
         "short":"Sammlung von Werkzeugen für den Webmaster",
         "long":"Sammlung von Werkzeugen für den Webmaster",
-        "url":"https:\/\/kit2.phpmanufaktur.de"
+        "url":"https:\/\/kit2.phpmanufaktur.de\/WebmasterTools"
     }
   },
   "require":{
